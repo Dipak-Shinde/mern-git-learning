@@ -5,6 +5,8 @@ import ViewClientDetails from './pages/ViewClientDetails';
 import ClientList from './pages/ClientList';
 import EditClient from './pages/EditClient';
 import AddClient from './pages/AddClient';
+import Git from './pages/git';
+import ContactUs from './pages/ContactUs';
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
 <Route path='/clientList' element={<ClientList/>}/>
 <Route path='/editClient' element={<EditClient/>}/>
 <Route path='/addClient' element={<AddClient/>}/>
+<Route path='/git' element={<Git/>}/>
+<Route path='/contact' element={<ContactUs/>}/>
     </Routes>
     </BrowserRouter>
   )
