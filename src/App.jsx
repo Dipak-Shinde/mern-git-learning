@@ -7,7 +7,7 @@ import EditClient from './pages/EditClient';
 import AddClient from './pages/AddClient';
 import Git from './pages/git';
 import ContactUs from './pages/ContactUs';
-
+import Services from './pages/Services.jsx'
 const App = () => {
   return (
     <BrowserRouter>
@@ -18,6 +18,7 @@ const App = () => {
 <Route path='/addClient' element={<AddClient/>}/>
 <Route path='/git' element={<Git/>}/>
 <Route path='/contact' element={<ContactUs/>}/>
+<Route path='/services' element={<Services/>}/>
     </Routes>
     </BrowserRouter>
   )
