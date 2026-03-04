@@ -1,99 +1,58 @@
-import React from "react";
-import { Eye, Pencil, Trash2, Search, Plus } from "lucide-react";
+import React, { useState } from "react";
 
 const ClientList = () => {
+  const [clients] = useState([
+    { id: 1, name: 'Raj Kumar', email: 'raj.kumar@gmail.com', phone: '7654323423', city: 'Pune', dob: '10 Jul 1982', gender: 'Male' },
+    { id: 2, name: 'Priya Singh', email: 'priya.singh@gmail.com', phone: '8765432134', city: 'Mumbai', dob: '22 Mar 1990', gender: 'Female' },
+  ])
   return (
-    <div className="min-h-screen bg-black text-white px-8 py-6">
+    <div>
+      <style>{`
+        .client-list-page{font-family:Inter,ui-sans-serif,system-ui,Arial;color:#e6eef8}
+        .page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:16px}
+        .page-title{font-size:28px;font-weight:700;color:#fff}
+        .controls{display:flex;gap:12px;flex-wrap:wrap}
+        .search-box{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.01);flex:1;min-width:200px}
+        .search-box input{background:transparent;border:none;color:inherit;outline:none;width:100%;font-size:14px}
+        .btn-primary{padding:10px 18px;border-radius:10px;border:0;cursor:pointer;background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#031025;font-weight:700;transition:transform 0.18s}
+        .btn-primary:hover{transform:translateY(-2px)}
+        .table-wrapper{overflow-x:auto;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.01)}
+        table{width:100%;border-collapse:collapse;font-size:14px}
+        thead{background:linear-gradient(90deg,rgba(11,120,255,0.1),rgba(124,58,237,0.1));border-bottom:1px solid rgba(108,167,255,0.2)}
+        th{padding:14px 16px;text-align:left;font-weight:600;color:#bfe9ff;text-transform:uppercase;font-size:12px}
+        td{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.03)}
+        tbody tr:hover{background:rgba(11,120,255,0.05)}
+        .action-buttons{display:flex;gap:8px}
+        .btn-icon{width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.18s}
+        .btn-icon:hover{background:rgba(11,120,255,0.1);border-color:rgba(108,167,255,0.4)}
+      `}</style>
+      <div className="client-list-page">
+        <div className="page-header">
+          <div className="page-title">👥 Client List</div>
+          <div className="controls">
+            <div className="search-box"><span>🔍</span><input type="text" placeholder="Search clients..." /></div>
 
-      {/* HEADER */}
-      <div className="flex justify-between items-center mb-4">
-
-        <h1 className="text-xl text-yellow-400 font-semibold">
-          Client |
-        </h1>
-
-        <div className="flex items-center gap-3">
-
-          {/* Search */}
-          <div className="flex items-center border border-yellow-600 rounded px-3 py-1">
-            <Search size={16} className="text-yellow-400 mr-2" />
-            <input
-              type="text"
-              placeholder="Search Customers"
-              className="bg-transparent outline-none text-sm placeholder-gray-400"
-            />
+            <button className="btn-primary">+ Add Client</button>
           </div>
-
-          {/* Add Button */}
-          <button className="flex items-center gap-2 border border-yellow-600
-           text-yellow-400 px-4 py-1 rounded
-           hover:bg-yellow-600 hover:text-black transition">
-
-            <Plus size={16} />
-            Add New Client
-          </button>
-
+        </div>
+        <div className="table-wrapper">
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Email</th><th>Phone</th><th>City</th><th>DOB</th><th>Gender</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+              {clients.map(client => (
+                <tr key={client.id}>
+                  <td><strong>{client.name}</strong></td>
+                  <td style={{color:'#9cecff'}}>{client.email}</td>
+                  <td>{client.phone}</td><td>{client.city}</td><td>{client.dob}</td><td>{client.gender}</td>
+                  <td><div className="action-buttons"><button className="btn-icon">👁️</button><button className="btn-icon">✏️</button><button className="btn-icon">🗑️</button></div></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-
-      {/* TABLE */}
-      <table className="w-full text-sm">
-
-        {/* TABLE HEADER */}
-        <thead className="bg-gradient-to-r from-yellow-700 to-yellow-500 text-black">
-          <tr>
-            <th className="p-3 text-left">CLIENT NAME</th>
-            <th className="p-3 text-left">EMAIL</th>
-            <th className="p-3 text-left">CONTACT NO.</th>
-            <th className="p-3 text-left">LOCATION</th>
-            <th className="p-3 text-left">DOB</th>
-            <th className="p-3 text-left">GENDER</th>
-            <th className="p-3 text-left">ACTION</th>
-          </tr>
-        </thead>
-
-        {/* TABLE BODY */}
-        <tbody>
-
-          <tr className="border-b border-yellow-700 hover:bg-yellow-900/20">
-
-            <td className="p-3">Raj Kumar</td>
-
-            <td className="p-3 text-blue-400 underline cursor-pointer">
-              raj.kumar23@gmail.com
-            </td>
-
-            <td className="p-3">7654323423</td>
-            <td className="p-3">Pune</td>
-            <td className="p-3">10 Jul 1982</td>
-            <td className="p-3">Male</td>
-
-            {/* ACTION BUTTONS */}
-            <td className="p-3">
-              <div className="flex gap-2">
-
-                <button className="border border-yellow-600 p-2 rounded
-                text-yellow-400 hover:bg-yellow-600 hover:text-black">
-                  <Eye size={16} />
-                </button>
-
-                <button className="border border-yellow-600 p-2 rounded
-                text-yellow-400 hover:bg-yellow-600 hover:text-black">
-                  <Pencil size={16} />
-                </button>
-
-                <button className="border border-yellow-600 p-2 rounded
-                text-yellow-400 hover:bg-red-600 hover:text-white">
-                  <Trash2 size={16} />
-                </button>
-
-              </div>
-            </td>
-
-          </tr>
-
-        </tbody>
-      </table>
     </div>
   );
 };

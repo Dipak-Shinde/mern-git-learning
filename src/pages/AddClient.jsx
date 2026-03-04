@@ -1,187 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AddClient = () => {
-
-  const SelectField = ({ label }) => (
-    <div>
-      <label className="text-xs text-yellow-500 mb-1 block">
-        {label}
-        <span className="text-red-500">*</span>
-      </label>
-
-      <div className="relative">
-        <select
-          className="
-          w-full appearance-none
-          bg-[#0b0b0b]
-          border border-yellow-600
-          rounded-md
-          px-3 py-2
-          text-sm text-gray-200
-          cursor-pointer
-          focus:outline-none
-          focus:border-yellow-400
-          focus:ring-1
-          focus:ring-yellow-400
-          transition-all
-        "
-        >
-          <option>Select {label}</option>
-        </select>
-
-        {/* Custom Arrow */}
-        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-yellow-400 pointer-events-none">
-          ▼
-        </span>
-      </div>
-    </div>
-  );
-
-  const InputField = ({ label, type = "text" }) => (
-    <div>
-      <label className="text-xs text-yellow-500 mb-1 block">
-        {label}
-        <span className="text-red-500">*</span>
-      </label>
-
-      <input
-        type={type}
-        className="
-        w-full bg-transparent
-        border border-yellow-600
-        rounded-md
-        px-3 py-2
-        text-sm
-        focus:outline-none
-        focus:border-yellow-400
-        focus:ring-1
-        focus:ring-yellow-400
-        transition-all
-      "
-      />
-    </div>
-  );
+  const [form, setForm] = useState({})
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setForm(prev => ({ ...prev, [name]: value }))
+  }
 
   return (
-    <div className="min-h-screen bg-[#0b0b0b] text-gray-200 px-6 py-6">
+    <div>
+      <style>{`
+        .add-client-page{font-family:Inter,ui-sans-serif,system-ui,Arial;color:#e6eef8}
+        .page-title{font-size:28px;font-weight:700;margin-bottom:24px;letter-spacing:0.3px;color:#fff}
+        .form-section{margin-bottom:26px}
+        .section-title{font-size:18px;font-weight:600;margin-bottom:14px;color:#bfe9ff;letter-spacing:0.5px;border-bottom:1px solid rgba(108,167,255,0.2);padding-bottom:10px}
+        .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+        .form-field{position:relative}
+        .form-label{font-size:12px;font-weight:600;color:rgba(230,238,248,0.7);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;display:block}\n        .form-input, .form-select, .form-textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.01);color:inherit;outline:none;transition:box-shadow 0.25s, border-color 0.18s, transform 0.18s;font-family:inherit;font-size:14px}\n        .form-input:focus, .form-select:focus, .form-textarea:focus{box-shadow:0 6px 22px rgba(11,120,255,0.08);border-color:rgba(108,167,255,0.6);transform:translateY(-2px)}\n        .form-textarea{resize:vertical;min-height:120px}\n        .form-actions{display:flex;gap:12px;margin-top:32px}\n        .btn-primary{padding:12px 28px;border-radius:10px;border:0;cursor:pointer;background:linear-gradient(90deg,#06b6d4,#7c3aed);color:#031025;font-weight:700;box-shadow:0 8px 30px rgba(124,58,237,0.12);transition:transform 0.18s, box-shadow 0.18s}\n        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(124,58,237,0.2)}\n        .btn-secondary{padding:12px 28px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:rgba(230,238,248,0.9);font-weight:600;cursor:pointer;transition:background 0.18s, border-color 0.18s}\n        .btn-secondary:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.2)}\n        @media (max-width:780px){.form-grid{grid-template-columns:1fr}}\n      `}</style>
 
-      {/* HEADER */}
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-semibold text-yellow-400 tracking-wide">
-          Add Client
-        </h1>
+      <div className="add-client-page">
+        <div className="page-title">➕ Add New Client</div>
 
-        <button className="
-        px-4 py-2 rounded-md
-        border border-yellow-500
-        text-yellow-400
-        hover:bg-yellow-500
-        hover:text-black
-        transition-all">
-          Back
-        </button>
-      </div>
-
-      {/* ================= PERSONAL DETAILS ================= */}
-      <div className="
-      bg-[#111]
-      rounded-xl
-      p-6
-      shadow-lg
-      border border-yellow-700/30">
-
-        <h2 className="
-        text-yellow-400 font-semibold mb-5
-        border-b border-yellow-700 pb-2">
-          Personal Details
-        </h2>
-
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
-          <InputField label="First Name" />
-          <InputField label="Last Name" />
-          <InputField label="Contact" />
-          <InputField label="Email" />
-
-          <SelectField label="Gender" />
-
-          <InputField label="Birthdate" type="date" />
-        </div>
-      </div>
-
-      {/* ================= ADDRESS ================= */}
-      <div className="
-      bg-[#111]
-      rounded-xl
-      p-6
-      shadow-lg
-      border border-yellow-700/30
-      mt-8">
-
-        <h2 className="
-        text-yellow-400 font-semibold mb-5
-        border-b border-yellow-700 pb-2">
-          Address Details
-        </h2>
-
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
-
-          <div className="lg:col-span-2">
-            <InputField label="Address Line 1" />
+        <div className="form-section">
+          <div className="section-title">Personal Information</div>
+          <div className="form-grid">
+            <div className="form-field">
+              <label className="form-label">First Name</label>
+              <input type="text" name="firstName" className="form-input" placeholder="John" onChange={handleChange} />
+            </div>
+            <div className="form-field">
+              <label className="form-label">Last Name</label>
+              <input type="text" name="lastName" className="form-input" placeholder="Doe" onChange={handleChange} />
+            </div>
+            <div className="form-field">
+              <label className="form-label">Email</label>
+              <input type="email" name="email" className="form-input" placeholder="john@example.com" onChange={handleChange} />
+            </div>
           </div>
+        </div>
 
-          <InputField label="Address Line 2" />
-
-          <SelectField label="Country" />
-          <SelectField label="State" />
-          <SelectField label="City" />
-
-          <div>
-            <label className="text-xs text-yellow-500 mb-1 block">
-              Pin<span className="text-red-500">*</span>
-            </label>
-
-            <input
-              placeholder="411017"
-              className="
-              w-full bg-transparent
-              border border-yellow-600
-              rounded-md
-              px-3 py-2
-              text-sm
-              focus:outline-none
-              focus:border-yellow-400
-              focus:ring-1
-              focus:ring-yellow-400
-            "
-            />
+        <div className="form-section">
+          <div className="section-title">Contact Information</div>
+          <div className="form-grid">
+            <div className="form-field">
+              <label className="form-label">Phone</label>
+              <input type="tel" name="phone" className="form-input" placeholder="+1 555 123 4567" onChange={handleChange} />
+            </div>
+            <div className="form-field">
+              <label className="form-label">City</label>
+              <input type="text" name="city" className="form-input" placeholder="New York" onChange={handleChange} />
+            </div>
+            <div className="form-field">
+              <label className="form-label">Country</label>
+              <input type="text" name="country" className="form-input" placeholder="USA" onChange={handleChange} />
+            </div>
           </div>
-
         </div>
 
-        {/* BUTTONS */}
-        <div className="flex justify-end gap-4 mt-8">
-
-          <button className="
-          px-5 py-2 rounded-md
-          border border-yellow-500
-          text-yellow-400
-          hover:bg-yellow-500
-          hover:text-black
-          transition-all">
-            Cancel
-          </button>
-
-          <button className="
-          px-6 py-2 rounded-md
-          bg-yellow-500
-          text-black font-medium
-          hover:bg-yellow-400
-          transition-all">
-            Save Client
-          </button>
-
+        <div className="form-section">
+          <div className="section-title">Additional Details</div>
+          <div className="form-grid" style={{gridTemplateColumns:'1fr'}}>
+            <div className="form-field">
+              <label className="form-label">Notes</label>
+              <textarea name="notes" className="form-textarea" placeholder="Add any additional notes..." onChange={handleChange} />
+            </div>
+          </div>
         </div>
 
+        <div className="form-actions">
+          <button className="btn-primary">✓ Add Client</button>
+          <button className="btn-secondary">⌫ Cancel</button>
+        </div>
       </div>
     </div>
   );
